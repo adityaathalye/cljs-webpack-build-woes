@@ -1,0 +1,18 @@
+;; shadow-cljs configuration
+{:source-paths
+ ["src"]
+
+ :dependencies
+ []
+ :nrepl false
+ :builds
+ {:app {:build-id :dev
+        :target :browser
+        :output-dir "target/public/js"
+        :asset-path "/js"
+        :modules {:main {:entries [core]}}
+        :nrepl false
+        :js-options {:js-provider :external
+                     :external-index "target/index.js"
+                     ;; :external-index-format :esm
+                     }}}}
