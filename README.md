@@ -5,12 +5,8 @@ ref: https://github.com/phiresky/sql.js-httpvfs/tree/master#minimal-example-from
 
 ```
 npm install
-cp 
 npx shadow-cljs watch app
-```
-wait for build to complete, otherwise the `target/public/js` folder won't exist. you can of course just create it manually and run the copy first.
-```
-cp node_modules/sql.js-httpvfs/dist/sql-wasm.wasm target/public/js/
+cp node_modules/sql.js-httpvfs/dist/sql-wasm.wasm resources/public
 ```
 
 open http://localhost:8001

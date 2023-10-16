@@ -11,7 +11,7 @@
                                           :url "/example.sqlite3"
                                           :requestChunkSize 4096}}])
                       "/js/worker.js"
-                      "/js/sql-wasm.wasm")]
+                      "/sql-wasm.wasm")]
     (js-await [result (-> worker .-db (.exec "select * from mytable"))]
       (js/console.log "result" result))))
 

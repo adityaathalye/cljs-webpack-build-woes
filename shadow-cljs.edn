@@ -6,11 +6,11 @@
  []
 
  :dev-http
- {8001 ["resources/public" "target/public"]}
+ {8001 "resources/public"}
 
  :builds
  {:app {:target :browser
-        :output-dir "target/public/js"
+        :output-dir "resources/public/js"
         :modules {:shared {:entries []}
                   :main {:init-fn core/init
                          :depends-on #{:shared}}

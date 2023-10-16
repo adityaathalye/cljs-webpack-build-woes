@@ -3,4 +3,7 @@
 .idea
 *.iml
 node_modules
+resources/public/js
+# maybe just keep it in the repo instead? 
+resources/public/*.wasm
 target
