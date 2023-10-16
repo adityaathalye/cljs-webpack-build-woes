@@ -1,28 +1,19 @@
 (ns core
   (:require
-   ;; ref: "Using npm packages"
-   ;; https://shadow-cljs.github.io/docs/UsersGuide.html#_using_npm_packages
-   ;; - see example: import { thing } from "foo.bar";
-   ;; - see heading: including a Module for side-effects only
-   ["sql.js-httpvfs" :refer (createDbWorker)] ; this gets bundled
-   ["sql.js-httpvfs/dist/sqlite.worker.js"] ; this gets bundled
-   ["sql.js-httpvfs/dist/sql-wasm.wasm"] ; this gets copied over
-   ))
+    [shadow.cljs.modern :refer (js-await)]
+    ["sql.js-httpvfs" :as vfs]
+    ))
 
-(def worker-url
-  (js/URL. "js/bundle.js", js/document.URL))
-
-#_(def wasm-url
-  (js/URL. "js/", js/document.URL))
-
-#_(def db-worker
-  (sjs/createDbWorker
-    (clj->js [{:from "inline"
-               :config {:server-mode "full"
-                        :url "/example.sqlite3"
-                        :requestChunkSize 4096}}])
-    (.toString worker-url)
-    (.toString wasm-url)))
+(defn init []
+  (js-await [worker (vfs/createDbWorker
+                      (clj->js [{:from "inline"
+                                 :config {:server-mode "full"
+                                          :url "/example.sqlite3"
+                                          :requestChunkSize 4096}}])
+                      "/js/worker.js"
+                      "/js/sql-wasm.wasm")]
+    (js-await [result (-> worker .-db (.exec "select * from mytable"))]
+      (js/console.log "result" result))))
 
 #_(js/console.log db-worker)
 

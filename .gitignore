@@ -1,3 +1,6 @@
 .shadow-cljs
+.cpcache
+.idea
+*.iml
 node_modules
 target
