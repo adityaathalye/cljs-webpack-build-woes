@@ -4,6 +4,7 @@
 *.iml
 node_modules
 resources/public/js
+example/dist
 # maybe just keep it in the repo instead? 
 resources/public/*.wasm
 target
