@@ -23,11 +23,15 @@
                       "/js/worker.js"
                       "/js/sql-wasm.wasm")]
             (js/console.log worker)
-            #_(js/console.log "=== querying haiku db ===")
-            #_(js-await [result (-> worker
-                                    .-db
-                                    (.exec "SELECT * FROM haiku LIMIT 5;"))]
-                        (js/console.log result))))
+            (js/console.log "=== querying haiku db ===")
+            (js-await [result (-> worker
+                                  .-db
+                                  ;; (.exec "SELECT * FROM haiku LIMIT 5;")
+                                  (.exec "select * from haiku order by random() limit 1"))]
+                      (-> js/document
+                          (.getElementById "app")
+                          (.-innerHTML)
+                          (set! (js/JSON.stringify result))))))
 
 (defn ^:dev/after-load init
   []
