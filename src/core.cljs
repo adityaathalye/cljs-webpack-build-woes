@@ -18,7 +18,7 @@
 
 (defn query-haiku []
   (js-await [worker (vfs/createDbWorker
-                      (clj->js [{:from "jsconfig"
+                      (clj->js [{:from "jsonconfig"
                                  :configUrl "/config.json"}])
                       "/js/worker.js"
                       "/js/sql-wasm.wasm")]
